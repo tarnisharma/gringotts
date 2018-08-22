@@ -23,35 +23,42 @@ import com.yatra.kafka.producer.BusSeoProducer;
 @SpringBootTest
 public class BusSeoKafkaTest {
 
-  private static String BUSSEO_TOPIC = "busseo.t";
+	private static String BUSSEO_TOPIC = "busseo.t";
 
-  @Autowired
-  private BusSeoProducer sender;
+	@Autowired
+	private BusSeoProducer sender;
 
-  @Autowired
-  private BusSeoConsumer receiver;
+	@Autowired
+	private BusSeoConsumer receiver;
 
-  @Autowired
-  private KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry;
+	@Autowired
+	private KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry;
 
-  @ClassRule
-  public static KafkaEmbedded embeddedKafka = new KafkaEmbedded(1, true, BUSSEO_TOPIC);
+	@ClassRule
+	public static KafkaEmbedded embeddedKafka = new KafkaEmbedded(1, true, BUSSEO_TOPIC);
 
-  @Before
-  public void setUp() throws Exception {
-    // wait until the partitions are assigned
-    for (MessageListenerContainer messageListenerContainer : kafkaListenerEndpointRegistry
-        .getListenerContainers()) {
-      ContainerTestUtils.waitForAssignment(messageListenerContainer,
-          embeddedKafka.getPartitionsPerTopic());
-    }
-  }
+	@Before
+	public void setUp() throws Exception {
+		// wait until the partitions are assigned
+		for (MessageListenerContainer messageListenerContainer : kafkaListenerEndpointRegistry
+				.getListenerContainers()) {
+			System.out.println("#########################################");
+			System.out.println(messageListenerContainer.toString() + " " + messageListenerContainer.getPhase() + " "
+					+ messageListenerContainer.isRunning() + " " + embeddedKafka.getBrokersAsString() + " "
+					+ embeddedKafka.getPartitionsPerTopic());
+			ContainerTestUtils.waitForAssignment(messageListenerContainer, embeddedKafka.getPartitionsPerTopic());
+		}
+	}
+	
+	
 
-  @Test
-  public void testReceive() throws Exception {
-    sender.send(BUSSEO_TOPIC, "Hello Spring Kafka!");
+	@Test
+	public void testReceive() throws Exception {
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+		sender.send(BUSSEO_TOPIC, "Hello Spring Kafka!");
 
-    receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
-    assertThat(receiver.getLatch().getCount()).isEqualTo(0);
-  }
+		receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
+		assertThat(receiver.getLatch().getCount()).isEqualTo(0);
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+	}
 }

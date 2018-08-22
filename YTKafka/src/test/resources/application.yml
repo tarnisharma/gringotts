@@ -1,0 +1,6 @@
+kafka:
+  busseo:
+   bootstrap-servers: ${spring.embedded.kafka.brokers}
+   topic:
+     busseotopic: busseo.t
+     group-id: busseo.g

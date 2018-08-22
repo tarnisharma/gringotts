@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
+Built-By: B0207448
+Build-Jdk: 10.0.2
 Implementation-Title: YTKafka
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: tarni.sharma
 Implementation-Vendor-Id: com.yatra
-Build-Jdk: 1.8.0_144
+Implementation-Vendor: Pivotal Software, Inc.
 Implementation-URL: http://projects.spring.io/spring-boot/YTKafka/
 Created-By: Maven Integration for Eclipse
-Implementation-Vendor: Pivotal Software, Inc.
 
