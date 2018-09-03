@@ -42,7 +42,6 @@ public class BusSeoKafkaTest {
 		// wait until the partitions are assigned
 		for (MessageListenerContainer messageListenerContainer : kafkaListenerEndpointRegistry
 				.getListenerContainers()) {
-			System.out.println("#########################################");
 			System.out.println(messageListenerContainer.toString() + " " + messageListenerContainer.getPhase() + " "
 					+ messageListenerContainer.isRunning() + " " + embeddedKafka.getBrokersAsString() + " "
 					+ embeddedKafka.getPartitionsPerTopic());
@@ -54,11 +53,8 @@ public class BusSeoKafkaTest {
 
 	@Test
 	public void testReceive() throws Exception {
-		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 		sender.send(BUSSEO_TOPIC, "Hello Spring Kafka!");
-
 		receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
 		assertThat(receiver.getLatch().getCount()).isEqualTo(0);
-		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
 	}
 }
