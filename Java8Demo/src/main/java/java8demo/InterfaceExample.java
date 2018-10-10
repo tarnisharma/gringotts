@@ -37,7 +37,7 @@ public class InterfaceExample implements X, Y {
 	}
 
 	@Override
-	public void hello() {
+	public void hello() { // have to override this method if both the interfaces have defined the same method
 		System.out.println("Overriding  Hello");
 	}
 
