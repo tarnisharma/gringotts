@@ -16,7 +16,7 @@ interface X {
 	}
 }
 
-public class InterfaceExample implements X, Y {
+public class InterfaceExampleDefaultMethod implements X, Y {
 
 	@Override
 	public void y() {
@@ -42,7 +42,7 @@ public class InterfaceExample implements X, Y {
 	}
 
 	public static void main(String args[]) {
-		InterfaceExample obj = new InterfaceExample();
+		InterfaceExampleDefaultMethod obj = new InterfaceExampleDefaultMethod();
 		obj.x();
 		obj.y();
 		obj.hello();
